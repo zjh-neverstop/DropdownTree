@@ -1,0 +1,13 @@
+.ddtree{
+      background-color: #f0f8ff;
+			position:absolute;
+      height:auto;
+      overflow: auto;
+      border: solid 1px gray;
+      display: none;
+}
+
+.item_hover{
+      background-color: #87ceeb;
+      color:red;cursor:pointer;
+}
