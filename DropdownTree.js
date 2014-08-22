@@ -1,5 +1,5 @@
 /**
- * Created by 赵晶浩 on 14-8-21.
+ * Created by 赵晶浩 on 2014-8-21.
  */
 
 
@@ -132,7 +132,6 @@ var DropdownTree = (function(){
     var initAbstructTree = function (obj)
     {
         var rootCount = 0;
-        //array_1为全局变量
         var treeArray = new Array(1);
         for(var i=0;i<obj.array.length;i++)
         {
@@ -409,21 +408,41 @@ var DropdownTree = (function(){
     };
 
     /**
-     * 原型方法扩展，调用此方法创建树形结构，在这个方法里依次调用上面的方法完成树的创建
+     * 原型方法扩展，调用此方法创建树形结构，在这个方法里依次调用上面定义的方法完成树的创建
      * @type {{}}
      */
     dropdownTree.prototype.createTree = function(){
         if(this.array instanceof Array && this.array.length > 0){
-            initLevel(this); //add property named level to all the object
-            this.array.sort(compare("level","id")); //sort the array according to the object's property of level
-            var treeArray = initAbstructTree(this);
-            createAbstructTree(this,treeArray); //执行完这个方法后，数组array_1就保存了树形结构的信息
-            var signalArray = new Array();//图标数组
-            generateTreeHtml(this,treeArray,signalArray);
+            
+            this.html = "";
+            
+            //计算每个元素在树中的层号
+            initLevel(this); 
+            
+            //按照数组元素的level和id进行排序
+            this.array.sort(compare("level","id")); 
+            
+            //根节点的处理
+            var treeArray = initAbstructTree(this); 
+            
+            //递归处理每一个元素，将树形结构的信息保存在链表数组treeArray中
+            createAbstructTree(this,treeArray); 
+            
+            //用来存放图标的临时数组
+            var signalArray = new Array();
+            
+            //递归处理每一个元素，生成html
+            generateTreeHtml(this,treeArray,signalArray); 
+            
             $("#"+this.treeDivId).html(this.html);
-            this.success = true;
+            
+            if(this.html.length > 0){
+                this.success = true;
+            }
+            
             tree_additionalFunction(this);
-            //调整结果div的宽度并定位
+            
+            //调整树形div的宽度并定位
             positionDiv(this.controlID, this.treeDivId);
         }
     };
