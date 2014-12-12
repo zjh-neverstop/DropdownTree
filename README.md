@@ -15,7 +15,7 @@ DropdownTree
     <script type="text/javascript" src="jquery-1.7.2.min.js"></script>  
     <script type="text/javascript" src="dropdownTree.js"></script>   
     
-2：生成数据，每条数据需要有"id","parentId"和"name"属性，name就是显示的内容。数据的生成根据具体业务通过后台自行生成，该类库只负责显示，下面是生成后的示例数据：    
+2：生成数据，每条数据需要有"id","parentId"和"name"属性，name就是显示的内容。数据的生成根据具体业务通过后台自行生成，该类库只负责数据的处理与展示，下面是生成后的示例数据：    
 
     var array3 = [
     		{id:0,parentId:-1,name:"《Mongodb权威指南》"},
