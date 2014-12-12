@@ -31,7 +31,7 @@ var DropdownTree = (function(){
         while (temp.offsetParent) {
             temp = temp.offsetParent;
             x += temp.offsetLeft;
-            y += temp.offsetTop;
+            y += temp.offsetTop - 1;  //使下拉树的上边框与input的下边框重合
         }
         //alert("x:"+x+" y:"+y);
         return { left: x, top: y };
@@ -46,7 +46,7 @@ var DropdownTree = (function(){
         var obj = document.getElementById(sourceDiv);
         var xy = getOffset(obj);
         $("#" + targetDiv).css("left", xy.left);
-        $("#" + targetDiv).css("width", $("#" + sourceDiv).outerWidth());
+        $("#" + targetDiv).css("width", $("#" + sourceDiv).outerWidth() - 2);  //如果不需要宽度一致，注释掉该行代码，减2是去掉边框，这样才能对齐
         $("#" + targetDiv).css("top", (xy.top + $("#" + sourceDiv).outerHeight()));
 
     };
